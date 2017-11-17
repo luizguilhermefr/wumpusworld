@@ -4,8 +4,21 @@ Implementação do Mundo de Wumpus utilizando AIMA e PYGAME.
 
 Requisitos
 
-1. instalar pygame
-2. `python wumpus_world.py`
+1. instalar pygame:
+
+```
+sudo apt-get update
+sudo apt-get install python-pygame
+```
+
+2. instalar Tkinter:
+
+```
+sudo apt-get update
+sudo apt-get install python-tk
+```
+
+3. Executar: `python wumpus_world.py`
 
 **Autores**:
 
