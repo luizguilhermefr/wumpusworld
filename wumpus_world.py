@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 
 from event import EventManager
@@ -7,8 +8,8 @@ from controller import *
 from app import App
 from ai import Agent
 
-
 def main():
+    """Início do sistema"""
     ev_manager = EventManager()
 
     main_frame = MainFrame(ev_manager)
@@ -17,7 +18,7 @@ def main():
     ai = Agent(ev_manager)
     app = App(ev_manager)
 
-    spinner.run() 
+    spinner.run()
 
 
 if __name__ == "__main__":

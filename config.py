@@ -33,8 +33,8 @@ help = """
    R: Reiniciar
    Q: Sair
    
-   A luz no canto inferior
-   esquerdo, quando vermelha,
+   O sinal no canto inferior
+   esquerdo, quando vermelho,
    demonstra ocupado e,
    quando verde, pronto para
    o proximo passo.

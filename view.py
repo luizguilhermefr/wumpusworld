@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 import pdb
 
@@ -11,7 +12,7 @@ from util import load_image
 
 
 class MainFrame:
-    """Main Frame -- the whole window"""
+    """Main Frame -- a janela como um todo"""
 
     def __init__(self, ev_manager):
         self.ev_manager = ev_manager
@@ -273,7 +274,7 @@ class Sector(pygame.sprite.Sprite):
 
 
 class StatusDisplay(pygame.sprite.Sprite):
-    """Game information display area"""
+    """Área de exibição de informações do jogo"""
 
     def __init__(self, group=None):
         pygame.sprite.Sprite.__init__(self, group)
@@ -353,7 +354,7 @@ class Player(pygame.sprite.Sprite):
 
     def update_facing(self, facing=None):
 
-        # clear the old facing line
+        # atualiza o desenho da célula
         if self.facing is not None:
             image = pygame.Surface((30, 30))
             image.fill(color['black'])

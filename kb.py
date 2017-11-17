@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 import pdb
 
@@ -16,7 +17,7 @@ except ImportError:
 
 
 class WumpusKB():
-    """A KB for wumpus world"""
+    """Base de conhecimento do sistema"""
 
     def __init__(self, sentence=None):
         self.k = expr('~P00 & ~W00')
@@ -34,7 +35,7 @@ class WumpusKB():
         e = expr(' & '.join(li))
         self.tell(e)
 
-        # one and only one wumpus
+        # apenas um Wumpus
         li = ['W%s%s' % (i, j) for i in range(4) for j in range(4)]
         e = expr(' | '.join(li))
         self.tell(e)

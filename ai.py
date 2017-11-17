@@ -306,7 +306,7 @@ class Agent:
                                 know.append("~%s%s%s" % (map_list[c], i, j))
                             c += 1
                         if len(know) > 0:
-                            print "tell kb: ", ' & '.join(know)
+                            print "informa base de conhecimento: ", ' & '.join(know)
                             self.kb.tell(expr(' & '.join(know)))
 
                         self._find_safe(i, j)
