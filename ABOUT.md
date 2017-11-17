@@ -1,5 +1,9 @@
 # Sobre o Mundo do Wumpus
 
+**João Victor Canabarro**
+
+**Luiz Guilherme Fonseca Rosa**
+
 ## Introdução
 
 O Mundo do Wumpus é um jogo baseado em agentes proposto em 1972 por Gregory Yob, cujo objetivo é encontrar uma peça de ouro em um mapa de dimensões quadradáticas.
@@ -69,7 +73,19 @@ Deste modo, o agente segue buscando pelas posições seguras, até que por fim p
 
 ## Comportamentos e Características do Agente
 
+O agente gera três listas em sua base de conhecimento:
 
+- A lista de percepções de todo seu histórico.
+
+- A lista de posições seguras para o próximo passo.
+
+- A lista de percepções da casa atual.
+
+Com base nisso, o agente pode decidir para qual casa avançar. O agente nunca retorna para uma posição que já considerou insegura anteriormente, o que evita qualquer tipo de looping infinito.
+
+Além disso, uma característica curiosa no comportamento do agente é quando nenhum ouro é disposto no mapa. O caçador irá buscar por todo o mapa até cair em um buraco ou morrer pelas mãos do monstro, inevitavelmente.
+
+O agente também tem a possibilidade de matar o monstro, porém apenas quando o Wumpus estiver sobre o ouro ou bloqueando sua passagem até o objetivo final. Fora estes casos, o caçador evitará ao máximo o perigo de morrer pelas mãos do carrasco, indo sempre pelo caminho mais seguro.
 
 ## Modos de Jogo
 
@@ -79,3 +95,8 @@ Há dois modos: um passo-a-passo, onde a cada "espaço" do jogador o agente dá 
 ![Screenshot2](img/screenshots/wumpus2.png "Screenshot2")
 ![Screenshot3](img/screenshots/wumpus3.png "Screenshot3")
 
+## Referências
+
+*Russell, Stuart, and Peter Norvig. "Inteligência Artificial: uma abordagem moderna. Ed." Campus, 2ª Edição. São Paulo, Brazil (2003).*
+
+*Diversos autores. "PyGame". <https://www.pygame.org/docs/> - Acessado em 17 de novembro de 2017.*
