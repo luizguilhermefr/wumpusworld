@@ -11,21 +11,19 @@ from util import load_image
 
 
 class MainFrame:
-
     """Main Frame -- the whole window"""
 
-    
     def __init__(self, ev_manager):
         self.ev_manager = ev_manager
         self.ev_manager.register_listener(self)
 
         pygame.init()
         self.screen = pygame.display.set_mode((769, 820))
-        pygame.display.set_caption('wumpus world')
-        
-	self.background = pygame.Surface(self.screen.get_size())
+        pygame.display.set_caption('Mundo de Wumpus')
+
+        self.background = pygame.Surface(self.screen.get_size())
         self.background.convert()
-	self.background.fill(color['gray'])
+        self.background.fill(color['gray'])
 
         self.screen.blit(self.background, (0, 0))
         pygame.display.flip()
@@ -43,7 +41,7 @@ class MainFrame:
     def _handle_app_start(self):
         dx, dy = (192, 192)
         x, y = (3, 4)
-        rect = pygame.Rect(2+192*3, -192+2, 188, 188)
+        rect = pygame.Rect(2 + 192 * 3, -192 + 2, 188, 188)
         for count in xrange(16):
             if count % 4 == 0:
                 x -= 3
@@ -59,7 +57,6 @@ class MainFrame:
 
         self._status_display = StatusDisplay(self.back_sprites)
         self._status_display.rect = pygame.Rect(0, 770, 769, 50)
-
 
         self._player = Player()
 
@@ -141,7 +138,7 @@ class MainFrame:
         self.ev_manager.post(ev)
 
     def _redraw(self):
-        # Draw everything
+        # Desenha tudo
         self.back_sprites.clear(self.screen, self.background)
         self.front_sprites.clear(self.screen, self.background)
 
@@ -184,16 +181,16 @@ class MainFrame:
         elif isinstance(ev, event.FoundDangerEvent):
             self._handle_found_danger(ev)
 
-class HelpDisplay(pygame.sprite.Sprite):
 
-    """Help information"""
+class HelpDisplay(pygame.sprite.Sprite):
+    """Informacoes de ajuda"""
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((500, 580))
+        self.image = pygame.Surface((500, 380))
         self.image.set_alpha(255 * 0.6)
         self.image.fill(color['gray'])
-        self.rect= self.image.get_rect()
+        self.rect = self.image.get_rect()
         self.text = help
 
         self._draw_text()
@@ -221,8 +218,7 @@ class HelpDisplay(pygame.sprite.Sprite):
 
 
 class Sector(pygame.sprite.Sprite):
-
-    """Sector of the map"""
+    """Setores do mapa"""
 
     def __init__(self, group=None):
         pygame.sprite.Sprite.__init__(self, group)
@@ -246,7 +242,6 @@ class Sector(pygame.sprite.Sprite):
             self.image.fill(color['danger'])
         else:
             self.image.fill(color['black'])
-        
 
     def toggle_view(self, view_flag):
         self.view = view_flag
@@ -267,7 +262,6 @@ class Sector(pygame.sprite.Sprite):
         rect.center = self.image.get_rect().center
         self.image.blit(image, rect)
 
-
     def visit(self):
         if not self.visited:
             self.visited = True
@@ -279,7 +273,6 @@ class Sector(pygame.sprite.Sprite):
 
 
 class StatusDisplay(pygame.sprite.Sprite):
-    
     """Game information display area"""
 
     def __init__(self, group=None):
@@ -292,14 +285,14 @@ class StatusDisplay(pygame.sprite.Sprite):
         self.timer = 0
 
         self.red_light, self.red_pos = \
-                        load_image('red_light.png', -1)
+            load_image('red_light.png', -1)
         self.green_light, self.green_pos = \
-                          load_image('green_light.png', -1)
+            load_image('green_light.png', -1)
         self.red_pos.midleft = \
-                             self.image.get_rect().move(10, 0).midleft
+            self.image.get_rect().move(10, 0).midleft
         self.green_pos.midleft = \
-                               self.image.get_rect().move(10, 0).midleft
-        
+            self.image.get_rect().move(10, 0).midleft
+
     def display(self, text, col=color['info']):
         self.image.fill(color['background'])
         self.text = text
@@ -347,9 +340,9 @@ class StatusDisplay(pygame.sprite.Sprite):
     def update(self):
         self.draw_ready_busy()
 
+
 class Player(pygame.sprite.Sprite):
-    
-    """Player in the cave"""
+    """Jogador na caverna"""
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -360,27 +353,12 @@ class Player(pygame.sprite.Sprite):
 
     def update_facing(self, facing=None):
 
-        def draw_facing(image, rect):
-            if self.facing == 0:
-                rect.midtop = self.image.get_rect().midtop
-            elif self.facing == 1:
-                rect.midright = self.image.get_rect().midright
-            elif self.facing == 2:
-                rect.midbottom = self.image.get_rect().midbottom
-            elif self.facing == 3:
-                rect.midleft = self.image.get_rect().midleft
-            self.image.blit(image, rect)
-            
         # clear the old facing line
         if self.facing is not None:
             image = pygame.Surface((30, 30))
             image.fill(color['black'])
             rect = image.get_rect()
-            draw_facing(image, rect)
         self.facing = facing
-        image, rect = load_image('facing_%s.png' % \
-                                 self.facing, -1)
-        draw_facing(image, rect)
 
     def update(self):
         if self.moveto:

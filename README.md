@@ -14,3 +14,5 @@ João Canabarro <joaovictorcana@gmail.com>
 Luiz Rosa <luizguilhermefr@gmail.com>
 
 **Fork** de Wu Zhe <wu@madk.org>.
+
+**Icones** de `https://github.com/thiagodnf/wumpus-world-simulator`

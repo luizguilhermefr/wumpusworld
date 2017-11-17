@@ -1,23 +1,21 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 """
-World map & Percept data sturcture
+Estrutura de dados do Mapa & Percepção
 ==================================
 
-B: Breeze
-G: Gold
-P: Pit
-S: Stench
+B: Brisa
+G: Ouro
+P: Buraco
+S: Fedor
 W: Wumpus
 
-Every sector in the world contains an indicator list [B, G, P, S, W]
-2 indicates presence, 1 indicates uncertainty, 0 indicates absence
+Cada setor do mundo contem uma lista de indicadores [B, G, P, S, W]
+2 indica presença, 1 incerteza e 0 ausência
 """
-import pdb
 
 import random
-import time
-import copy
 import numpy
 
 import event
@@ -58,7 +56,7 @@ def neighbors(i, j):
 
 class Agent:
 
-    """AI agent"""
+    """Agente computacional"""
 
     def __init__(self, ev_manager):
         self.ev_manager = ev_manager
@@ -85,14 +83,14 @@ class Agent:
         self.known_world = numpy.ones((4, 4, 5))
         self.kb = WumpusKB()
 
-        # choosing a sector for Gold
+        # escolhendo setor para o ouro
         i, j = self._random_ij()
         self.world[i][j][1] = 2
 
-        # choosing a sector for Wumpus
+        # escolhendo setor para o Wumpus
         i, j = self._random_ij()
         self.world[i][j][4] = 2
-        # generating Stench
+        # gerando fedor
         for pos in neighbors(i, j):
             self.world[pos[0]][pos[1]][3] = 2
 
@@ -100,12 +98,12 @@ class Agent:
             for j in range(4):
                 if not ((i == 0) and (j == 0)):
                     
-                    # generating Pit for this sector with a
-                    # Probability of 0.2
+                    # gerando buraco para este setor com
+                    # probabilidade de 20%
                     if random.randint(1, 10) <= 2:
                         self.world[i][j][2] = 2
 
-                        # generating Breeze
+                        # gerando brisa
                         for pos in neighbors(i, j):
                             self.world[pos[0]][pos[1]][0] = 2
 
@@ -121,7 +119,7 @@ class Agent:
             i = (r - 3) / 4
             j = (r + 1) % 4
 
-        return (i, j)
+        return i, j
 
     def _next(self):
         ev = event.BusyEvent()
@@ -132,8 +130,8 @@ class Agent:
                 action = self.plan.pop()
             else:
                 i, j = (self.pos[0], self.pos[1])
-                percept = self.world[i][j]
-                action = self._pl_wumpus_agent(percept)
+                # percept = self.world[i][j]
+                action = self._pl_wumpus_agent()
 
             self._do(action)
         else:
@@ -143,7 +141,7 @@ class Agent:
         ev = event.ReadyEvent()
         self.ev_manager.post(ev)
 
-    def _pl_wumpus_agent(self, percept):
+    def _pl_wumpus_agent(self):
         if len(self.safe) > 0:
             source = self.safe
         elif len(self.fringe) > 0:
@@ -164,12 +162,12 @@ class Agent:
         new_danger = set()
 
         if (self.world[i][j][0] == 0) and (self.world[i][j][3] == 0):
-            self.fringe -= set((i, j))
+            self.fringe -= {i, j}
             new_safe |= new
         else:
             self.fringe |= new
 
-        print "fringe: ", self.fringe
+        print "beirada: ", self.fringe
 
         fringe = self.fringe.copy()
         if len(self.visited) > 1:
@@ -187,7 +185,7 @@ class Agent:
         if len(new_danger) > 0:
             self.danger |= new_danger
 
-        print "safe list: ", self.safe
+        print "posicoes seguras: ", self.safe
 
     def _shortest_path(self, goal):
         g = self.visited
@@ -229,6 +227,7 @@ class Agent:
         return pa
 
     def _path2plan(self, path):
+        global direction
         plan = []
         prev = self.pos
         prev_facing = self.facing
@@ -238,7 +237,7 @@ class Agent:
             dy_dict = {
                 -1: 'down',
                 1: 'up',
-                0: 'up' # dummy item
+                0: 'up' # item inutil
                 }
             dx_dict = {
                 -1: 'left',
@@ -351,9 +350,10 @@ class Agent:
             self.ev_manager.post(ev)
 
     def _wumpus_die(self, i, j):
+        global pos
         self.world[i][j][4] = 0
         for pos in neighbors(i, j):
-            self.world[pos[0]][pos[1]][3] = 0 # eliminate stench
+            self.world[pos[0]][pos[1]][3] = 0 # elimina fedor
 
         ev = event.WumpusDieEvent(pos)
         self.ev_manager.post(ev)
