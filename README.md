@@ -2,6 +2,12 @@
 
 Implementação do Mundo de Wumpus utilizando AIMA e PYGAME.
 
+![Screenshot1](img/screenshots/wumpus1.png "Screenshot1")
+
+![Screenshot2](img/screenshots/wumpus2.png "Screenshot2")
+
+![Screenshot3](img/screenshots/wumpus3.png "Screenshot3")
+
 Requisitos
 
 1. instalar pygame:
