@@ -1,9 +1,5 @@
 # Sobre o Mundo do Wumpus
 
-**João Victor Canabarro**
-
-**Luiz Guilherme Fonseca Rosa**
-
 ## Introdução
 
 O Mundo do Wumpus é um jogo baseado em agentes proposto em 1972 por Gregory Yob, cujo objetivo é encontrar uma peça de ouro em um mapa de dimensões quadradáticas.
