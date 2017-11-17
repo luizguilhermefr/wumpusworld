@@ -12,7 +12,7 @@ try:
     import psyco
     psyco.bind(dpll_satisfiable)
 except ImportError:
-    print "psyco module not found."
+    print "Modulo psyco nao encontrado."
 
 
 class WumpusKB():
@@ -55,10 +55,10 @@ class WumpusKB():
 
     def ask(self, s):
         print "===================="
-        print "ask about: ", s
+        print "pergunta sobre: ", s
         start = time.time()
         r = dpll_satisfiable(self.k & ~s)
-        print "cost: ", time.time() - start
+        print "custo: ", time.time() - start
         if r is False:
             return True
         else:

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 
 from event import TickEvent, AppStartEvent
@@ -6,7 +7,7 @@ from event import TickEvent, AppStartEvent
 
 class App:
 
-    """Application logic"""
+    """Lógica da aplicação"""
 
     STATE_PREPARING = 0
     STATE_RUNNING = 1

@@ -10,7 +10,7 @@ from config import wait_ticks, fps
 
 class CPUSpinnerController:
 
-    """CPU Spinner controller"""
+    """Controlador do Spinner de CPU"""
 
     def __init__(self, ev_manager):
         self.ev_manager = ev_manager
@@ -24,7 +24,6 @@ class CPUSpinnerController:
         count = 0
         while self.keep_going:
             self.clock.tick(fps)
-            #print "fps: ", self.clock.get_fps()
             ev = event.TickEvent()
             self.ev_manager.post(ev)
 
@@ -37,7 +36,6 @@ class CPUSpinnerController:
 
     def notify(self, ev):
         if isinstance(ev, event.QuitEvent):
-            # this will stop the while loop from running
             self.keep_going = False
         elif isinstance(ev, event.ToggleAutoEvent):
             if self.auto_mode:
@@ -47,7 +45,7 @@ class CPUSpinnerController:
 
 class KeyboardController:
     
-    """Keyboard Controller"""
+    """Controlador do Teclado"""
 
     def __init__(self, ev_manager):
         self.ev_manager = ev_manager
