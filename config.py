@@ -1,9 +1,10 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 import os
 
 #
-# application-wide consistent color definition
+# definição das cores
 #
 
 color = {
@@ -20,36 +21,34 @@ color = {
     'danger': (60, 30, 30)
     }
 
-instruction = "Press H to view help, SPACE to step, Q to quit"
+instruction = "H => ajuda, ESPACO => passo-a-passo, Q => sair"
 
 help = """
-  Wumpus World AI Demo Instructions
+  Instrucoes
 
-   H: Display this help info
-   Space: Step
-   C: Toggle auto/manual step mode
-   V: Toggle view all mode
-   R: Reset the world
-   Q: Quit
-
-   The bottom left light denotes busy
-   when red, ready for next step when
-   green.
-
-        programmer: Wu Zhe 1070379096
+   H: Exibir ajuda
+   Espaco: Passo-a-passo
+   C: Alterar modo manual/auto
+   V: Visualizar todo o mapa
+   R: Reiniciar
+   Q: Sair
+   
+   A luz no canto inferior
+   esquerdo, quando vermelha,
+   demonstra ocupado e,
+   quando verde, pronto para
+   o proximo passo.
 """
 
-# Frames per second
+# frames por segundo
 fps = 20
 
-# status light
+# luz de status
 light_flick_ticks = 5
 
-# In auto mode, how many ticks to wait before generating next step
-# event
+# No modo automático, quantos ciclos aguardar antes de gerar o próximo
+# passo
 wait_ticks = 10
 
-
-status_font = (os.path.join('font', 'comic.ttf'), 26)
+status_font = (os.path.join('font', 'FreeMono.ttf'), 23)
 help_font = status_font
-
